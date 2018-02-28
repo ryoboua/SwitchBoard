@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import QuestionnaireForm from './components/questionnaireForm';
-import TitleBanner from './components/titleBanner';
+import TitleBanner from './components/TitleBanner';
+import StartButton from './components/StartButton';
 
 
 class App extends Component {
@@ -11,8 +11,7 @@ class App extends Component {
       <div className="App">
         <MuiThemeProvider>
           <TitleBanner />
-          
-          <QuestionnaireForm />
+          <StartButton />
         </MuiThemeProvider>
       </div>
     );
