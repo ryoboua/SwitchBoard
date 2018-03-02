@@ -41,17 +41,19 @@ export default class QuestionnaireForm extends Component {
     render() { 
         return (  
         <Paper style={fromStyle}>
-            <h1 style={{padding:'0px 20px', width:'100%'}} >Let's start with your name!</h1>
+            <form style={{width: '100%'}} >
+                <h1 style={{padding:'0px 20px', width:'100%'}} >Let's start with your name!</h1>
 
-            <TextField style={textFieldSyle} underlineShow={false} value={this.state.firstName} onChange={this.handleChange} type='text' name='firstName'hintText='First Name' />
-            <TextField style={textFieldSyle} underlineShow={false} value={this.state.lastName} onChange={this.handleChange} type='text' name='lastName' hintText='Last Name'/>
-            <Divider style={{ width: '100%'}} />
-            
-            <h3 style={{padding:'10px 20px', width:'100%'}}>Country Filter</h3>
-            <CountryFilter />
-            <Divider style={{ width: '100%'}} />
+                <TextField style={textFieldSyle} underlineShow={false} value={this.state.firstName} onChange={this.handleChange} type='text' name='firstName'hintText='First Name' />
+                <TextField style={textFieldSyle} underlineShow={false} value={this.state.lastName} onChange={this.handleChange} type='text' name='lastName' hintText='Last Name'/>
+                <Divider style={{ width: '100%'}} />
+                
+                <h3 style={{padding:'10px 20px', width:'100%'}}>Country Filter</h3>
+                <CountryFilter />
+                <Divider style={{ width: '100%'}} />
 
-            <SortableComponent />
+                <SortableComponent />
+            </form>
         </Paper>
         )
     }
