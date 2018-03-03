@@ -7,21 +7,16 @@ const toggleStyle = {
     margin: '0px 15px'
 }
 
+
 const isAllOn = function(arr) {
-    let count = 0
-    for(let i=0; i<arr.length; i++){
-        if(arr[i] === true) count++
-    }
-    if(count === arr.length) return true
+    let count = arr.filter(x => x === true)
+    if(count.length === arr.length) return true
     return false
 }
 
 const isAllOff = function(arr) {
-    let count = 0
-    for(let i=0; i<arr.length; i++){
-        if(arr[i] === false) count++
-    }
-    if(count === arr.length) return true
+    let count = arr.filter(x => x === false)
+    if(count.length === arr.length) return true
     return false
 }
 export default class SwitchGame extends React.Component {
@@ -49,7 +44,7 @@ export default class SwitchGame extends React.Component {
         setTimeout(() => {
             this.toggleSetCheck()
         } , 1)
-
+   
     }
     masterSwitch() {     
         this.setState({
@@ -93,13 +88,11 @@ export default class SwitchGame extends React.Component {
         let t2 = this.state.c2
         let t3 = this.state.c3
         let arr = [t1,t2,t3]
-        console.log(isAllOn(arr))
         if (isAllOn(arr)) this.setState({masterOn: false, masterOff: true})
         if (isAllOff(arr)) this.setState({masterOff: false, masterOn: true})
     }     
-    render(){
 
-        
+    render(){ 
         return (
             <div style={{display: 'flex', width: '100%', margin: '50px 0px', paddingLeft: '15px', flexWrap: 'wrap', justifyContent: 'space-evenly'}} >
                 <Toggle name='c1' style={toggleStyle} label={''} toggled={this.state.c1} onToggle={this.singleSwitch} />
