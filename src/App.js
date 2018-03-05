@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          {/* <TitleBanner /> */}
+          <TitleBanner />
           <StartButton />
         </MuiThemeProvider>
       </div>

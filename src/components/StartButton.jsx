@@ -1,7 +1,6 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import QuestionnaireForm from './QuestionnaireForm';
-import SwitchGame from './SwitchGame';
+import SwitchBoard from './SwitchBoard';
 
 const style = {
     margin: '15px',
@@ -30,7 +29,7 @@ class StartButton extends React.Component {
         if(isShowingForm){
             form = <RaisedButton onClick={ e => this.handleShowForm(e) } style={style}>Start Questionnaire</RaisedButton>
         } else {
-            form = <SwitchGame />
+            form = <SwitchBoard />
         }
         return (
            <div>{form}</div>
