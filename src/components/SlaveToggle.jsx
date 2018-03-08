@@ -11,7 +11,6 @@ export default class SlaveToggle extends React.Component {
     constructor(props){
         super(props)
         this.handleToggle = this.handleToggle.bind(this)
-
     }
     handleToggle(event, value) {
         let name = event.target.name

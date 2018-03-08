@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TitleBanner from './components/TitleBanner';
-import StartButton from './components/StartButton';
+import SwitchBoard from './components/SwitchBoard';
 
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <MuiThemeProvider>
           <TitleBanner />
-          <StartButton />
+          <SwitchBoard />
         </MuiThemeProvider>
       </div>
     );

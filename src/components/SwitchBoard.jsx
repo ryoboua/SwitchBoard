@@ -2,6 +2,7 @@ import React from 'react'
 import Toggle from 'material-ui/Toggle'
 import SlaveToggle from './SlaveToggle';
 import SlaveToggleList from './SlaveToggleList'
+import ControlUnit from './ControlUnit'
 
 const masterToggleStyle = {
     display: 'inline-block',
@@ -47,55 +48,55 @@ export default class SwitchBoard extends React.Component {
     constructor(props){
         super(props)
 
-        let num = 10
+        let numOfToggles = 5 //this.props.numOfToggles
         let slaveStateHolder = {}
 
-        for( let i = 0; i<num; i++) {
-            slaveStateHolder['t'+i] = false
+        for( let i = 0; i < numOfToggles; i++) {
+            slaveStateHolder['t' + i] = false
         }
-        this.state = {  
-        slaveStateHolder, master: false, masterOn: false, masterOff: true
+
+        const masterStateHolder = { 
+            master: false, 
+            masterOn: false, 
+            masterOff: true
+        }
+
+        this.state = { 
+        slaveStateHolder, masterStateHolder
         }
         this.masterSwitch = this.masterSwitch.bind(this)
         this.singleSwitch = this.singleSwitch.bind(this)
         this.masterSwitchOn = this.masterSwitchOn.bind(this)
         this.masterSwitchOff = this.masterSwitchOff.bind(this)
         this.toggleUpdate = this.toggleUpdate.bind(this)
-
+        this.actionList = this.actionList.bind(this)
     }
 
+    actionList(){
+        return [this.masterSwitch, this.masterSwitchOff, this.masterSwitchOn]
+    }
     singleSwitch(name, value) {
         this.setState({slaveStateHolder: {...this.state.slaveStateHolder, [name]: value }},() => {
-            this.toggleUpdate(this.state.slaveStateHolder)
+           this.toggleUpdate(this.state.slaveStateHolder)
         })
     }
 
     masterSwitch() {
-        let newStates = setAllToOpposite(this.state.slaveStateHolder)
-        this.setState({slaveStateHolder: newStates, master: !this.state.master}, () => {
+        let newSlaveStates = setAllToOpposite(this.state.slaveStateHolder)
+        this.setState({slaveStateHolder: newSlaveStates},() => {
             this.toggleUpdate(this.state.slaveStateHolder)
-            setTimeout(() => {
-                this.setState({master: false})
-            }, 400)
         })        
     }
 
     masterSwitchOn() {     
-        let newStates = setAllTrue(this.state.slaveStateHolder)
-        this.setState({slaveStateHolder: newStates, masterOn: !this.state.masterOn}, () =>{
-            setTimeout(() => {
-                this.setState({masterOff: true, masterOn: false})
-            }, 500)
-        })
+        let newSlaveStates = setAllTrue(this.state.slaveStateHolder)
+        let newMasterStates = { masterOn: true, masterOff: false }
+        this.setState({slaveStateHolder: newSlaveStates, masterStateHolder: newMasterStates})
     }
     masterSwitchOff() {
-        let newStates = setAllFalse(this.state.slaveStateHolder)     
-        this.setState({slaveStateHolder: newStates, masterOff: !this.state.masterOff}, () => {
-            setTimeout(() => {
-                this.setState({masterOff: false, masterOn: true})
-            }, 500)
-        })
-        
+        let newSlaveStates = setAllFalse(this.state.slaveStateHolder)
+        let newMasterStates = { masterOn: false, masterOff: true }     
+        this.setState({slaveStateHolder: newSlaveStates, masterStateHolder: newMasterStates})
     }
 
     toggleUpdate(slaveStateHolder){
@@ -103,22 +104,21 @@ export default class SwitchBoard extends React.Component {
         for(let bool in slaveStateHolder) {
             booleanArray.push(slaveStateHolder[bool])
         }
-        isAllOn(booleanArray) ? this.setState({masterOn: false, masterOff: true}) : this.setState({masterOn: true})
-        isAllOff(booleanArray) ? this.setState({masterOff: false, masterOn: true}) : this.setState({masterOff: true})
+
+        isAllOn(booleanArray) && this.setState({masterStateHolder: {...this.state.masterStateHolder, masterOn: true, masterOff: false }})
+        isAllOff(booleanArray) && this.setState({masterStateHolder: {...this.state.masterStateHolder, masterOn: false, masterOff: true }})
+
+
     }
 
     render(){     
         return (
             <div>
-                <div style={{display: 'flex', width: '100%', margin: '50px 0px', paddingLeft: '15px', flexWrap: 'wrap', justifyContent: 'space-evenly'}} >
-                    <Toggle name='master' style={masterToggleStyle} thumbSwitchedStyle={{background:'red'}} trackSwitchedStyle={{background:'red'}} labelPosition='right' label={'Switch All'} toggled={this.state.master}  onToggle={this.masterSwitch} />
-                    <Toggle name='masterOn' style={masterToggleStyle} thumbSwitchedStyle={{background:'red'}} trackSwitchedStyle={{background:'red'}} labelPosition='right' label={'Switch On'} toggled={this.state.masterOn}  onToggle={this.masterSwitchOn} />
-                    <Toggle name='masterOff' style={masterToggleStyle} thumbSwitchedStyle={{background:'red'}} trackSwitchedStyle={{background:'red'}} labelPosition='right' label={'Switch Off'} toggled={this.state.masterOff}  onToggle={this.masterSwitchOff} />
-                </div>
-                <div>
-                    <SlaveToggleList singleSwitch={this.singleSwitch} slaveStateHolder={this.state.slaveStateHolder}/>
-                </div>
+                <ControlUnit masterSwitch={this.masterSwitch} masterSwitchOn={this.masterSwitchOn} masterSwitchOff={this.masterSwitchOff} masterStateHolder={this.state.masterStateHolder} />
+                <SlaveToggleList singleSwitch={this.singleSwitch} slaveStateHolder={this.state.slaveStateHolder}/>
             </div>
         )
     }
 }
+
+

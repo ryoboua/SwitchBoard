@@ -20,7 +20,6 @@ const generateToggleSalves = function(numOfSlaves) {
     toggleGroup.push(toggles)
     return toggleGroup
 }
-
 const listStyle = {
     listStyle: 'none',
     display: 'flex',
