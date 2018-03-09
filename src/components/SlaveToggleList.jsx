@@ -50,6 +50,8 @@ export default class SlaveToggleList extends React.Component {
         return <div>{toggleSlaveList}</div>   
     }
 
+
+
     render(){ return this.toggleList() }
  
 }
