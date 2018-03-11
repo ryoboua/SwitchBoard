@@ -16,7 +16,16 @@ export default class SlaveToggle extends React.Component {
         let name = event.target.name
         this.props.callSingleSwitch(name, value)
     }
+
+    
     render() {
-        return <li><Toggle name={this.props.toggleName} style={toggleStyle} toggled={this.props.toggleValue} onToggle={this.handleToggle} /></li>
+        return <li>
+                <Toggle 
+                    name={this.props.toggleName}
+                    style={toggleStyle} 
+                    toggled={this.props.toggleValue} 
+                    onToggle={this.handleToggle} 
+                />
+                </li>
     }
 }

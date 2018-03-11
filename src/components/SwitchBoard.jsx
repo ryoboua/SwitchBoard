@@ -68,6 +68,7 @@ export default class SwitchBoard extends React.Component {
         this.masterSwitchOn = this.masterSwitchOn.bind(this)
         this.masterSwitchOff = this.masterSwitchOff.bind(this)
         this.toggleUpdate = this.toggleUpdate.bind(this)
+        this.updateNumberOfToggles = this.updateNumberOfToggles.bind(this)
     }
 
 
@@ -86,13 +87,16 @@ export default class SwitchBoard extends React.Component {
 
     masterSwitchOn() {     
         let newSlaveStates = setAllTrue(this.state.slaveStateHolder)
-        let newMasterStates = { masterOn: true, masterOff: false }
-        this.setState({slaveStateHolder: newSlaveStates, masterStateHolder: newMasterStates})
+        this.setState({slaveStateHolder: newSlaveStates}, () => {
+            this.toggleUpdate(this.state.slaveStateHolder)
+        })
+
     }
     masterSwitchOff() {
         let newSlaveStates = setAllFalse(this.state.slaveStateHolder)
-        let newMasterStates = { masterOn: false, masterOff: true }     
-        this.setState({slaveStateHolder: newSlaveStates, masterStateHolder: newMasterStates})
+        this.setState({slaveStateHolder: newSlaveStates}, () => {
+            this.toggleUpdate(this.state.slaveStateHolder)
+        })
     }
 
     toggleUpdate(slaveStateHolder){
@@ -100,7 +104,6 @@ export default class SwitchBoard extends React.Component {
         for(let bool in slaveStateHolder) {
             booleanArray.push(slaveStateHolder[bool])
         }
-
         if(isAllOn(booleanArray)){
             this.setState({masterStateHolder: {...this.state.masterStateHolder, masterOn: true, masterOff: false }})            
         } else if(isAllOff(booleanArray)){
@@ -110,17 +113,25 @@ export default class SwitchBoard extends React.Component {
         }
     }
 
-    updateNumberfToggles(newNumOfToggles){
+    updateNumberOfToggles(eventType, newNumOfToggles){
         this.setState({numOfToggles: newNumOfToggles})
+        console.log(eventType, newNumOfToggles)
     }
-
-
 
     render(){     
         return (
             <div>
-                <ControlUnit updateNumberfToggles={this.updateNumberfToggles} masterSwitch={this.masterSwitch} masterSwitchOn={this.masterSwitchOn} masterSwitchOff={this.masterSwitchOff} masterStateHolder={this.state.masterStateHolder} />
-                <SlaveToggleList singleSwitch={this.singleSwitch} slaveStateHolder={this.state.slaveStateHolder}/>
+                <ControlUnit 
+                    updateNumberOfToggles={this.updateNumberOfToggles} 
+                    masterSwitch={this.masterSwitch} 
+                    masterSwitchOn={this.masterSwitchOn} 
+                    masterSwitchOff={this.masterSwitchOff} 
+                    masterStateHolder={this.state.masterStateHolder} 
+                />
+                <SlaveToggleList 
+                    singleSwitch={this.singleSwitch} 
+                    slaveStateHolder={this.state.slaveStateHolder}
+                />
             </div>
         )
     }

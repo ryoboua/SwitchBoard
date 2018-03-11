@@ -13,11 +13,10 @@ const masterButtonStyle = {
 export default class ControlUnit extends React.Component {
     constructor(props){
         super(props)
-        this.state = {numberOfToggles: 1}
+        this.state = {numberOfToggles: 5}
         this.handleClick = this.handleClick.bind(this)
         this.handleMinus = this.handleMinus.bind(this)
         this.handlePlus = this.handlePlus.bind(this)
-        this.handleChange = this.handleChange.bind(this)
     }
 
     handleClick(event) {
@@ -40,18 +39,19 @@ export default class ControlUnit extends React.Component {
     handleMinus() {
         let numberOfToggles = this.state.numberOfToggles
         numberOfToggles = numberOfToggles - 1
-        this.setState({numberOfToggles: numberOfToggles})    
-
+        this.setState({numberOfToggles: numberOfToggles}, () => {
+            this.props.updateNumberOfToggles('minus', this.state.numberOfToggles)
+        })    
+        
     }
 
     handlePlus() {
         let numberOfToggles = this.state.numberOfToggles
         numberOfToggles = numberOfToggles + 1
-        this.setState({numberOfToggles: numberOfToggles})    
-    }
-
-    handleChange(){
-        this.props.updateNumberToggles(this.state.numberOfToggles)
+        this.setState({numberOfToggles: numberOfToggles}, () => {
+            this.props.updateNumberOfToggles('plus', this.state.numberOfToggles)
+        }) 
+        
     }
 
     render() {
@@ -61,7 +61,7 @@ export default class ControlUnit extends React.Component {
                     <FloatingActionButton onClick={this.handleMinus} >
                         <ContentRemove />
                     </FloatingActionButton>
-                    <TextField value={this.state.numberOfToggles} onChange={this.handleChange}  disabled={true} />
+                    <TextField value={this.state.numberOfToggles} disabled={false} />
                     <FloatingActionButton onClick={this.handlePlus}>
                         <ContentAdd />
                     </FloatingActionButton>
