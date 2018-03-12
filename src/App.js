@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TitleBanner from './components/TitleBanner';
-import SwitchBoard from './components/SwitchBoard'
+import ControlUnit from './components/ControlUnit'
 
 
 
@@ -10,9 +10,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <TitleBanner />
         <MuiThemeProvider>
-          <TitleBanner />
-          <SwitchBoard />
+          <ControlUnit />
         </MuiThemeProvider>
       </div>
     );

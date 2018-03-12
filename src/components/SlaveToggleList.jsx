@@ -42,16 +42,19 @@ export default class SlaveToggleList extends React.Component {
     }
     toggleList() {
         const slaveStateHolder = this.props.slaveStateHolder
-        const num = Object.keys(slaveStateHolder).length
+        let num = Object.keys(this.props.slaveStateHolder).length
         const toggleSlaveList = generateToggleSalves(num).map( (toggles, index) => {
-            const group = toggles.map(t => <SlaveToggle key={t} toggleName={t} toggleValue={slaveStateHolder[t]} callSingleSwitch={this.callSingleSwitch}  />)
+            const group = toggles.map(t => <SlaveToggle
+                                                key={t} toggleName={t}
+                                                toggleValue={slaveStateHolder[t]} 
+                                                callSingleSwitch={this.callSingleSwitch}  
+                                                />
+                                            )
             return <ul key={'group'+ index} style={listStyle} >{group}</ul>
         })
         return <div>{toggleSlaveList}</div>   
     }
-
-
-
-    render(){ return this.toggleList() }
+    render(){
+        return this.toggleList() }
  
 }
