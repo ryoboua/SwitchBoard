@@ -42,10 +42,10 @@ export default class ControlUnit extends React.Component {
             case 'SWITCH ALL':
             this.switchBoard.masterSwitch()
             break;
-            case 'SWITCH ON':
+            case 'SWITCH ALL ON':
             this.switchBoard.masterSwitchOn()
             break;
-            case 'SWITCH OFF':
+            case 'SWITCH ALL OFF':
             this.switchBoard.masterSwitchOff()
             break;
             default:
@@ -93,8 +93,8 @@ export default class ControlUnit extends React.Component {
                 </div>
                 <div style={{display: 'flex', width: '100%', margin: '50px 0px', paddingLeft: '15px', flexWrap: 'wrap', justifyContent: 'space-evenly'}} >
                     <RaisedButton className='master' onClick={this.handleClick} disabled={this.state.master} labelColor='#FFFFFF' backgroundColor='#FC5759' label={'Switch All'}   />
-                    <RaisedButton className='masterOn' onClick={this.handleClick} disabled={this.state.masterOn} labelColor='#FFFFFF' backgroundColor='#FC5759' label={'Switch On'} />
-                    <RaisedButton className='masterOff' onClick={this.handleClick} disabled={this.state.masterOff} labelColor='#FFFFFF' backgroundColor='#FC5759' label={'Switch Off'} />
+                    <RaisedButton className='masterOn' onClick={this.handleClick} disabled={this.state.masterOn} labelColor='#FFFFFF' backgroundColor='#FC5759' label={'Switch All On'} />
+                    <RaisedButton className='masterOff' onClick={this.handleClick} disabled={this.state.masterOff} labelColor='#FFFFFF' backgroundColor='#FC5759' label={'Switch All Off'} />
                 </div>
                 <SwitchBoard ref={instance => { this.switchBoard = instance }} 
                     toggleUpdate={this.toggleUpdate} 
