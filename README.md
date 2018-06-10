@@ -1,6 +1,6 @@
 ## Switch Board
 
-I created this Switchboard in order to get familliar with ReactJS
+I created this Switchboard in order to get familiar with ReactJS
 
 From this project I learned
  - How react is component based.
