@@ -1,11 +1,13 @@
 ## Switch Board
 
-I create this useless Switchboard to learn how to use react and to get a better understanding of components and props.
+I created this Switchboard in order to get familliar with ReactJS
 
-From this project I learnt
+From this project I learned
  - How react is component based.
- - How to manage component states.
- - How to lift the state of a component to a parent component.
- - How to send props to components
- - Worked on my ES6 
+ - Manage component state.
+ - Send props to child components
+ - Lift the state up to a parent component.
+ 
+ Reference
+ - https://reactjs.org/docs/hello-world.html
  
