@@ -1,13 +1,5 @@
 import React from 'react'
-import Toggle from 'material-ui/Toggle'
-import SlaveToggle from './SlaveToggle';
 import SlaveToggleList from './SlaveToggleList'
-
-const masterToggleStyle = {
-    display: 'inline-block',
-    width: '100px',
-    margin: '0px 15px'
-}
 
 const setAllTrue = slaveStateHolder => {
     for(let t in slaveStateHolder){
